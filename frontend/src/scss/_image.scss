@@ -1,0 +1,18 @@
+@charset 'UTF-8';
+
+.image {
+  &__img + .textimage__wrapper {
+    @include breakpoint($b-large) {
+      padding-top: $p-large;
+    }
+  }
+  &__img {
+    @include setParallax(300px, 'mobile', scroll);
+    // need fix parallax here with JS!
+    background-size: cover;
+
+    @include breakpoint($b-large) {
+      @include setParallax(500px, 'desktop', fixed)
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@charset 'UTF-8';
+
+// grid
+.grid__base {
+  display: block;
+  @supports(grid-area: auto) {
+    display: grid;
+  }
+}

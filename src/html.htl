@@ -21,14 +21,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <title>${content.title}</title>
-    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="../dist/all.bundle.css"/>
 </head>
 <body>
-
-${content.document.body.innerHTML}
-
-<hr>
-<em>generated at ${content.time}</em>
-
+  <header class="header__base">
+  </header>
+  <main class="main__base">
+    ${content.document.body.innerHTML}
+  </main>
+  <footer class="footer__base">
+    <em>generated at ${content.time}</em>
+  </footer>
+<script type="text/javascript" src="../dist/all.bundle.js"></script>
 </body>
 </html>

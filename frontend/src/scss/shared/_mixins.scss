@@ -1,0 +1,63 @@
+@charset 'UTF-8';
+
+// parallax effect
+@mixin setParallax($height, $device, $att) {
+  $device: 'mobile' !default;
+
+  height: $height;
+  background-attachment: $att;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @if $device == 'mobile' {
+    background-position: top center;
+    background-size: contain; 
+  } @else {
+    background-position: center;
+  } 
+}
+// button
+@mixin setButton($c-bg, $c-label, $r-radius) {
+  background-color: $c-bg;
+  color: $c-label;
+  border-radius: $r-radius;
+}
+
+// transition
+@mixin setTransition($t-type, $t-effect) {
+  transition: $t-type .3s $t-effect;
+}
+
+// font
+@mixin setFont($f-size, $f-weight, $f-style, $f-height) {
+  font-size: $f-size;
+  font-weight: $f-weight;
+  font-style: $f-style;
+  line-height: $f-height;
+}
+
+// border
+@mixin setBorder($b-width, $b-style, $b-color) {
+  border-color: $b-color;
+  border-width: $b-width;
+  border-style: $b-style;
+}
+
+// is absolutely centered
+@mixin setAbsoluteCenter() {
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
+%normalize {
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+}
+
+%center {
+    display: block;
+    margin: 0 auto;
+}

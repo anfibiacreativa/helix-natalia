@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+// min width for responsive mobile first
+$b-large: min-width 1025px;
+$b-mini: max-width 420px;
+
+// font definitions
+$font: 'Titillium Web', sans-serif;
+$font-mini: 12px;
+$font-small: 16px;
+$font-base: 20px;
+$font-hl: 40px;
+$font-subHl: 32px;
+
+// colors
+$c-body-bg: #35414d;
+$c-blue: rgba(82,159,198,1);
+$c-white: rgba(255,255,255,1);
+$c-black-25: rgba(0,0,0,0.25);
+$c-black-100: rgba(0,0,0,1);
+$c-dark-50: #000000;
+$c-grey: #82919b;
+$c-dark-grey: rgba(17,26,11,1);
+$c-light-grey:  #e3e4e4;
+
+// transitions
+$style-easeinout: ease-in-out;
+$style-linear: linear;
+
+// general paddings
+$p-large: 80px;
+$p-medium: $p-large/2;
+$p-small: 30px;
+$p-mini: 5px;
+
+// general margins
+$m-large: 80px;
+$m-medium: 50px;
+$m-small: 30px;
+$m-mini: 5px;
+
+// list indent
+$l-indent: 40px;
+
+// other layout miscellaneous
+$g-safeheight: 150px;

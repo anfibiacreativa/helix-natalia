@@ -1,0 +1,30 @@
+@charset 'UTF-8';
+
+$font-cta: 16px;
+
+// button
+.button {
+  &__button {
+    @include setButton($c-white, $c-black-100, 0.2em);
+    @include setBorder(1px, solid, $c-black-100);
+    @include setFont($font-base, 400, normal, 1.35);
+    @include setTransition(all, $style-linear);
+    @extend %normalize;
+    padding: 7px 17px;
+    margin-top: $p-medium;
+    text-align: center;
+
+    &--cta {
+      @include setBorder(2px, solid, $c-grey);
+      @include setButton($c-white, $c-grey, $p-medium);
+      padding: 8px 20px 9px 20px;
+      font-size: $font-cta;
+      line-height: 1;
+      vertical-align: middle;
+
+      &:before {
+        content: '♥';
+      }
+    }
+  }
+}

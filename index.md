@@ -18,21 +18,15 @@
 
 # Helix - mytestproject
 
-## Lorem ipsum
+## My first Helix Hackathon!
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. *Ut enim ad minim veniam, quis nostrud exercitation ullamco* laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-And some more stuff. hello
 
+## Other Helix Hackathons I will ne attending
 
-## What's next?
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. *Ut enim ad minim veniam, quis nostrud exercitation ullamco* laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-1. Try editing `index.md` and see what happens.
-2. Try editing `src/html.htl` to change the HTML output
-3. Try editing `htdocs/style.css` to change the way this page looks
+## About me
 
-## And then?
-
-4. Commit your changes: `git commit -a`
-5. Publish your project to GitHub: `git remote add origin https://github.com/user/repo.git && git push`
-6. Deploy the project: `hlx deploy`
-7. Make it visible to the world: `hlx publish`
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. *Ut enim ad minim veniam, quis nostrud exercitation ullamco* laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

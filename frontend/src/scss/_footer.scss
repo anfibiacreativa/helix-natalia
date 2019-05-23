@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+
+$linkpaddingh: 5px;
+
+// footer
+.footer {
+  &__base {
+    .panel__base {
+      padding-top: $p-small;
+    }
+  }
+  &__list {
+    text-align: center;
+    padding-bottom: $p-small;
+
+    li {
+      display: inline-block;
+    }
+    &__link {
+      @include setFont($font-mini, 300, normal, 1);
+      color: $c-light-grey;
+      padding: 0 $linkpaddingh;
+    }
+  }
+}

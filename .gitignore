@@ -1,5 +1,6 @@
 .hlx/
 .cache/
+.vscode/
 .DS_Store
 node_modules/
 pipeline.log

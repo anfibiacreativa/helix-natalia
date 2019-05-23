@@ -1,0 +1,105 @@
+@charset 'UTF-8';
+$p-buttonpadding-h: 17px;
+$p-buttonpadding-v: 7px;
+
+// text
+.text {
+  &__base {
+    color:$c-dark-grey;
+
+    &--right,
+    &--left {
+      width: 50%;
+    }
+  }
+  &__wrapper {
+    margin-bottom: $m-large;
+    padding-top: $p-medium;
+    h2 {
+      @include setFont($font-subHl, 300, normal, 3);
+      text-transform: none;
+
+      + p:first-child {
+        margin-top: 0;
+      }
+    }
+    h3,
+    h4,
+    h5,
+    h6 {
+      @include setFont($font-base, 700, normal, 1.5);
+      text-transform: none;
+    } 
+    p {
+      @include setFont($font-base, 300, normal, 1.6);
+      @extend %normalize;
+      color:$c-dark-grey;
+      min-height: $g-safeheight;
+
+      &:first-child {
+        margin-top: $m-medium;
+      }
+
+      strong,
+      b,
+      em {
+        font-weight: 700;
+      }
+      i {
+        font-style: italic;
+      }
+    }
+    ul {
+      border-top: 1px solid $c-grey;
+      text-align: center;
+      padding: $p-small 0;
+      margin: $m-large 0 $m-medium 0;
+  
+      li {
+        display: inline-block;
+        
+        a {
+          @include setFont($font-small, 300, normal, 1);
+          color: $c-dark-grey;
+          padding: 0 $linkpaddingh;
+        }
+      }
+    }
+    h3 + ul {
+      margin-top: $m-small;
+    
+      li {
+        display: block;
+        line-height: 2;
+        text-align: left;
+        text-indent: $l-indent;
+      }
+    }
+    a {
+      color: $c-blue;
+      text-decoration: underline;
+    }
+    a[href^="mailto:"] {
+      @include setAbsoluteCenter();
+      @extend %normalize;
+      display: inline-block;
+      @include setButton($c-white, $c-black-100, 0.2em);
+      @include setBorder(1px, solid, $c-black-100);
+      @include setFont($font-base, 400, normal, 1.35);
+      @include setTransition(all, $style-linear);
+      padding: $p-buttonpadding-v $p-buttonpadding-h;
+      margin-top: $m-medium;
+      text-align: center;
+
+      &:hover,
+      &:focus {
+        @include setButton($c-dark-grey, $c-white, 0.2em);
+        border-color: $c-dark-grey;
+      }
+    }
+    a[href*="youtu"] {
+      display: block;
+      margin-top: $m-small;
+    }
+  }
+}

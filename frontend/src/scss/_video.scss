@@ -1,0 +1,14 @@
+@charset 'UTF-8';
+
+// video
+.video {
+  &__base {
+    position: relative;
+    width: 100%;
+  }
+
+  &__video {
+    position: relative;
+    display: block;
+  }
+}

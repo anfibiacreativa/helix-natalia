@@ -1,0 +1,67 @@
+@charset 'UTF-8';
+
+// header
+.header {
+  &__wrapper {
+    position: relative;
+    .panel__base {
+      position: absolute;
+      top: 70%;
+      left: 53%;
+      transform: translateX(-50%);
+      padding-top: 0;
+
+      @include breakpoint($b-large) {
+        top: 50%;
+        left: 50%;
+      }
+
+      @include breakpoint($b-mini) {
+        top: 35%;
+        left: 50%;
+      }
+
+      p {
+        color: $c-white;
+        font-size: 24px;
+        font-weight: 300;
+        text-transform: uppercase;
+        line-height: 1.605;
+        text-shadow: 0px 2px 2px $c-black-25;
+  
+        @include breakpoint($b-large) {
+          max-height: 5em;
+        }
+      }
+    }
+  }
+  &__parallaxImg {
+    @include setParallax(400px, 'mobile', fixed);
+
+    @include breakpoint($b-large) {
+      @include setParallax(600px, 'desktop', initial);
+    }
+
+    @include breakpoint($b-mini) {
+      @include setParallax(260px, 'mobile', fixed);
+    }
+  }
+  &__img {
+    width: 100%;
+  }
+  &__hl {
+    max-height: 3em;
+    color: $c-white;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 100;
+    text-transform: none;
+    line-height: 1.0465;
+    letter-spacing: normal;
+    text-shadow: 0px 2px 2px $c-black-25;
+
+    @include breakpoint($b-large) {
+      font-size: 50px;
+    }
+  }
+}
