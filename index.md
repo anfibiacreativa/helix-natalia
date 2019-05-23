@@ -18,7 +18,7 @@
 
 # Helix - mytestproject
 
-It works! this project is not updating now. Not sure why?
+It works! maybe i need to hit deploy again
 
 ## What's next?
 

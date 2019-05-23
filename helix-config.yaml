@@ -1,0 +1,15 @@
+#
+# helix configuration for local development
+#
+version: 1
+
+definitions:
+  defaults:
+    - &defaultRepo "ssh://git@github.com/anfibiacreativa/helix-natalia.git"
+
+strains:
+  - name: default
+    code: ssh://git@github.com/anfibiacreativa/helix-natalia.git#master
+    content: ssh://git@github.com/anfibiacreativa/helix-natalia.git#master
+    static: ssh://git@github.com/anfibiacreativa/helix-natalia.git/htdocs#master
+    package: venditto/github-com--anfibiacreativa--helix-natalia--master-dirty
