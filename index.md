@@ -18,7 +18,7 @@
 
 # Helix - mytestproject
 
-It works! mytestproject is up and running.
+It works! mytestproject is up and running and is reactive.
 
 ## What's next?
 
