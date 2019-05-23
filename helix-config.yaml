@@ -5,11 +5,18 @@ version: 1
 
 definitions:
   defaults:
-    - &defaultRepo "ssh://git@github.com/anfibiacreativa/helix-natalia.git"
+    - &devRepo http://localhost/local/default.git
+    - &publicRepo "ssh://git@github.com/anfibiacreativa/helix-natalia.git#master"
+    - &publicStatic "ssh://git@github.com/anfibiacreativa/helix-natalia.git/htdocs#master"
 
 strains:
-  - name: default
-    code: ssh://git@github.com/anfibiacreativa/helix-natalia.git#master
-    content: ssh://git@github.com/anfibiacreativa/helix-natalia.git#master
-    static: ssh://git@github.com/anfibiacreativa/helix-natalia.git/htdocs#master
+  - name: default 
+    code: *publicRepo
+    content: *publicRepo
+    static: *publicStatic
     package: venditto/github-com--anfibiacreativa--helix-natalia--master-dirty
+  - name: dev
+    code: *devRepo
+    content: *devRepo
+    static: *devRepo
+    url: http://localhost:3000

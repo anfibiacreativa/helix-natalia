@@ -1,0 +1,14 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "A frontend package inside of my helix",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Natalia Venditto",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.32.2"
+  }
+}
