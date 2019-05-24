@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "sass": "^1.20.1",
+    "unist-builder": "1.0.4",
     "unist-util-select": "2.0.1",
     "hast-util-select": "3.0.0",
     "mdast-util-to-hast": "6.0.0",

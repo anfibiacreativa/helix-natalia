@@ -1,8 +1,37 @@
 // Global restraint
 
-p {
-  width: 100%;
+@import './variables';
+
+body {
+  font-family: 'Montserrat', sans-serif;
 }
+
+p {
+  color: $c-body-bg;
+}
+
 img {
   width: 100%;
+}
+
+section {
+  width: 100%;
+
+  p:not(:first-child) {
+    padding: 35px 50px;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  color: $c-blue;
+  padding: 0 25px;
+  line-height: 3;
+}
+
+h2 {
+  font-size: 20px;
+  color: $c-blue;
+  padding: 0 35px;
+  line-height: 1;
 }

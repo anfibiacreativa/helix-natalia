@@ -15,279 +15,33 @@
  * limitations under the License.
  *
  */
-const select = require('unist-util-select');
-const hastSelect = require('hast-util-select').select
-const toHAST = require('mdast-util-to-hast');
-const toHTML = require('hast-util-to-html');
-const mdastSqueezeParagraphs = require('mdast-squeeze-paragraphs');
-const mdastFlattenImages = require('mdast-flatten-image-paragraphs');
-const mdastFlattenLists = require('mdast-flatten-listitem-paragraphs');
 
+import * as config from './html.config';
 
-/**
- * The LayoutMachine is an implmentation of a state machine pattern
- * that tries to intelligently lay out the page.
- */
-const LayoutMachine = {
-  /*
-    States:
-      init -> hero, flow
-      hero -> flow
-  */
-  validStates: ['hero', 'flow', 'gallery', 'grid', 'footer'],
-  states: ['init'],
-  get state() {
-    return this.states[this.states.length - 1];
-  },
-  set state(v) {
-    this.states.push(v);
-    return v;
-  },
-  layout: function (section) {
-    // allow manual overide of class
-    // this might be instant-cruft–discuss.
-    if (section.class && section.class.length) {
-      // If class is a valid state, use it, otherwise default to 'flow'
-      if (this.validStates.includes(section.class)) {
-        this.states.push(section.class);
-      } else {
-        this.states.push('flow');
-      }
-    } else {
-      switch (this.state) {
-        case 'init':
-          if (this.isHero(section)) {
-            this.state = 'hero';
-          } else {
-            if (this.isGallery(section)) {
-              this.state = 'gallery';
-            }
-            if (this.isFooter(section)) {
-              this.state = 'footer';
-            } 
-            if (this.isGrid(section)) {
-              this.state = 'grid';
-            } else {
-              this.state = 'flow';
-            }
-          }
-          break;
-        case 'flow':
-        case 'hero':
-          if (this.isGallery(section)) {
-            this.state = 'gallery';
-          }
-          if (this.isFooter(section)) {
-            this.state = 'footer';
-          } 
-          if (this.isGrid(section)) {
-            this.state = 'grid';
-          }  else {
-              this.state = 'flow';
-          }
-          break;
-      }
-      section.class = this.state;
-    }
+// wrap sections with a base class
+function wrapSections(document) {
 
-    let children = [];
-    for (let e of section.children) {
-      children.push(e);
-    }
-    section.children = children;
-    return section;
-  },
-
-  get hasHero() {
-    return this.states.includes('hero');
-  },
-
-  get hasGrid() {
-    return this.states.includes('grid');
-  },
-
-  get hasFooter() {
-    return this.states.includes('footer');
-  },
-
-  isHero(section) {
-    // If the section has an h2 & an image in the first level, it's a hero
-    const image = select(section, 'image');
-    const p = select(section, 'paragraph');
-    return (p.length == 1 && image.length == 1);
-  },
-
-  isGallery(section) {
-    // If the section has more than 2 images, it is a gallery
-    const image = select(section, 'image');
-    return image.length > 2
-  },
-
-  isGrid(section) {
-    // If the section has the first element
-    const image = select(section, 'image');
-    const p = select(section, 'paragraph');
-    const hl = select(section, 'h2');
-    return (p.length > 1 && image.length == 1 && hl != 0);
-  },
-
-  isFooter(section) {
-    // If the section has the first element
-    const i = select(section, 'listItem');
-    return (i.length >= 1);
-  },
-}
-
-function getSmartDesign(mdast, breakSection) {
-  breakSection = breakSection ? breakSection : function (node) {
-    return node.type == 'thematicBreak';
-  };
-
-  mdast = mdastFlattenImages()(mdast);
-  mdast = mdastFlattenLists()(mdast);
-  mdast = mdastSqueezeParagraphs(mdast);
-
-  const mdastNodes = mdast.children;
-
-  const sections = [];
-  let currentSection = {
-    children: [],
-    type: 'standard'
-  };
-
-  let title;
-
-  mdastNodes.forEach(function (node) {
-    if (node.type == 'heading' && node.depth == 1 && !title) {
-      title = node.children[0].value;
-      return;
-    }
-    const br = breakSection(node);
-    if (br.break) {
-      sections.push(LayoutMachine.layout(currentSection));
-      currentSection = {
-        children: [],
-        type: 'standard'
-      };
-      if (br.include) {
-        currentSection.children.push(node);
-      }
-    } else {
-      currentSection.children.push(node);
-    }
+  const elems = document.querySelectorAll('section');
+  const sections = config.classNames || [];
+  
+  elems.forEach(element => {
+     if (sections && sections.length !== 0) {
+       element.classList.add(sections.sectionWrapperName);
+     }
   });
-
-  sections.push(LayoutMachine.layout(currentSection));
-  return sections;
-}
-
-function computeSectionsHAST(sections) {
-  const nodes = [];
-  let odd = false;
-  sections.forEach(function (section) {
-    const hast = toHAST(section);
-    const htmlNodes = [];
-    hast.children.forEach(function (h) {
-      htmlNodes.push(toHTML(h));
-    });
-    nodes.push({
-      type: "element",
-      properties: {
-        className: section.class + ' ' + ((odd = !odd) ? 'odd' : 'even'),
-      },
-      tagName: 'div',
-      children: hast.children,
-      data: {
-        type: section.class
-      }
-    });
-  });
-  return nodes;
-}
-
-function sectionsPipeline(context, breakSection) {
-  // get the sections MDAST
-  const sectionsMdast = getSmartDesign(context.content.mdast, breakSection);
-
-  // get the sections MDAST
-  const sectionsHAST = computeSectionsHAST(sectionsMdast);
-
-  // create a "convienence object" that gives access to individual mdast, hast and html for each section.
-  const sectionsDetails = [];
-
-  sectionsMdast.forEach(function (mdast, index) {
-    const hast = sectionsHAST[index];
-    sectionsDetails.push({
-      mdast: mdast,
-      hast: hast,
-      html: toHTML(hast),
-      type: hast.data.type
-    });
-  });
-
-  // convert full HAST to html
-  const html = toHTML({
-    type: 'root',
-    children: sectionsHAST
-  });
-
-  return {
-    html,
-    children: sectionsDetails
-  }
 }
 
 /**
  * The 'pre' function that is executed before the HTML is rendered
  * @param context The current context of processing pipeline
- * @param context.content The content resource
+ * @param context.content The content
  */
+
 function pre(context) {
+  const document = context.content.document;
 
-  // banner is first image and banner text is image alt
-  context.content.banner = {
-    img: '',
-    text: ''
-  };
-  
-  const firstImg = select(context.content.mdast, 'image');
-  if (firstImg.length > 0) {
-    context.content.banner = {
-      img: firstImg[0].url,
-      text: firstImg[0].alt
-    }
-  }
-
-  const determineBreaks = function(mdast) {
-    const isTB = mdast.type == 'thematicBreak'; // ---
-    const isH2 = mdast.type == 'heading' && mdast.depth == 2;
-    return {
-      break: isTB || isH2,
-      include: isH2
-    }
-  }
-  context.content.sections = sectionsPipeline(context, determineBreaks);
-
-  // EXTENSION point demo
-  // -> I need a different DOM for the hero section
-  if (context.content.sections.children.length > 0 && context.content.sections.children[0].type == 'hero') {
-    const hero = context.content.sections.children[0].hast;
-    const img = hastSelect('img', hero);
-    const p = hastSelect('p', hero);
-
-    // create object to be consumed in HTML to render custom HTML for hero section
-    context.content.sections.hero = {
-      sectionClass: hero.properties.className,
-      imgUrl: img.properties.src || '',
-      img: toHTML(img),
-      p: toHTML(p)
-    };
-  }
-
-  // avoid htl execution error if missing
-  context.content.meta = context.content.meta || {};
-  context.content.meta.references = context.content.meta.references || [];
-  context.content.meta.icon = context.content.meta.icon || '';
+  // wrapSections(document);
+  context.content.time = `${new Date()}`;
 }
 
 module.exports.pre = pre;

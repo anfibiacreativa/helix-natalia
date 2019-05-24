@@ -37,11 +37,31 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+body {
+  font-family: 'Montserrat', sans-serif; }
+
 p {
-  width: 100%; }
+  color: #35414d; }
 
 img {
   width: 100%; }
+
+section {
+  width: 100%; }
+  section p:not(:first-child) {
+    padding: 35px 50px; }
+
+h1 {
+  font-size: 30px;
+  color: #529fc6;
+  padding: 0 25px;
+  line-height: 3; }
+
+h2 {
+  font-size: 20px;
+  color: #529fc6;
+  padding: 0 35px;
+  line-height: 1; }
 
 .button__button, .text__wrapper p, .text__wrapper a[href^="mailto:"] {
   font-style: normal;
@@ -255,7 +275,6 @@ img {
       font-size: 50px; } }
 
 .body__base {
-  background-color: #35414d;
   font-family: "Titillium Web", sans-serif; }
 
 .main__wrapper {

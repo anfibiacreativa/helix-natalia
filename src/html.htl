@@ -22,6 +22,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <title>${content.title}</title>
     <link rel="stylesheet" href="../dist/all.bundle.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body class="body__base">
   <section>
