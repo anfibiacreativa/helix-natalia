@@ -23,15 +23,14 @@
     <title>${content.title}</title>
     <link rel="stylesheet" href="../dist/all.bundle.css"/>
 </head>
-<body>
-  <header class="header__base">
-  </header>
-  <main class="main__base">
+<body class="body__base">
+  <section>
+  </secrion>
+  <section>
     ${content.document.body.innerHTML}
-  </main>
-  <footer class="footer__base">
-    <em>generated at ${content.time}</em>
-  </footer>
+  </section>
+  <section>
+  </section>
 <script type="text/javascript" src="../dist/all.bundle.js"></script>
 </body>
 </html>

@@ -40,6 +40,10 @@ module.exports = {
       }
     ]
   },
+	optimization: {
+		// We no not want to minimize our code.
+		minimize: false
+	},
   plugins: [
     new MiniCssExtractPlugin({
         filename: `${BASE_LIB}${SUFFIX_BUNDLE}${SUFFIX_CSS}`
