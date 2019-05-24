@@ -20,7 +20,7 @@ const HELIX_FE_CONSTANTS = {
   // source path (relative to root)
   SOURCE: '../src',
   // target dir (where output will be generated)
-  TARGET: '/dist'
+  TARGET: '/htdocs'
 }
 
 const FILE_NAMES = {
